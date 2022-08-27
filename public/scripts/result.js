@@ -15,31 +15,37 @@ const woolData = {
     "brown": {'bits': 12, 'colour': '#918474'},
 };
 
-// window.addEventListener('load', (event) => {
-//     console.log('page is laoded')
-//     const load = document.getElementById('load-wrapper');
-//     load.style.display = "none"
+const submittedBlockId = localStorage.getItem("id");
+let submittedBlock = {
+    "id": "0",
+    "hexadecimal": "0x0000",
+    "bits": "0000000000000",
+    "longName": "minecraft:air",
+    "details": [
+        "no_details"
+    ],
+    "name": "air",
+    "oldName": "air",
+    "img": "https://minecraft-api.vercel.app/images/blocks/air.png"
+};
 
-//     const content = document.getElementById('content-wrap');
-//     content.style.display = null;
 
-// })
-const queryString = window.location.search;
-console.log(queryString);
-fetch("public/data/blocklist.json").then((response) => response.json()).then((data) => {
+fetch("public/data/blocklist.json").then((response) => response.json()).then(async (data) => {
     // Get the tabnav <ul>
     const tabnav = document.getElementById('tabnav');
     // Get the tabcontent <div>
     const tabcontent = document.getElementById('tabcontent');
 
-    Object.keys(woolData).forEach((wooltype) => {
+    submittedBlock = data[submittedBlockId];
+
+    for await (const wooltype of Object.keys(woolData)) {
         // Create a new tab <li> that looks like: <li class='tab active ' data-tab-target="#white">white</li>
         const tab = document.createElement('li');
-    
+            
         if (wooltype == 'white') { 
             tab.classList.add('active'); 
         }
-    
+
         // Give the tab <li> properties
         tab.innerHTML = wooltype;
         tab.id = "#" + wooltype;
@@ -47,12 +53,12 @@ fetch("public/data/blocklist.json").then((response) => response.json()).then((da
         tab.dataset.tabTarget = "#" + wooltype;
         tab.style.color = woolData[wooltype]['colour'];
         tab.dataset.tabColour = woolData[wooltype]['colour'];
-    
+
         // Add tab <li> to tabnav <ul>
         tabnav.appendChild(tab);
         // Add colour <div> to tabcontent <div>
         tabcontent.appendChild(blockResultsHolder(data, wooltype))
-    })
+    }
 
     // Get all tabs with the tabTarget property
     const tabs = document.querySelectorAll('[data-tab-target]');
@@ -65,7 +71,7 @@ fetch("public/data/blocklist.json").then((response) => response.json()).then((da
             
             // tab.dataset.tabTarget is the id from the tab content <div>
             const target = document.querySelector(tab.dataset.tabTarget)
-            // console.log(target) Give 'results' <div> the unique colour id and make all content childeren
+            // Give 'results' <div> the unique colour id and make all content childeren
             // Remove active class from all tabContents <div> and tabs <li>
             tabContents.forEach((content) => {
                 content.classList.remove('active')
@@ -86,21 +92,19 @@ fetch("public/data/blocklist.json").then((response) => response.json()).then((da
             tab.style.backgroundColor = tab.dataset.tabColour;
         })
     })
-})
 
-function getSubmittedBlock() {
-    const submittedBlockDiv = document.getElementById('submittedBlockDataDiv');
-    const submittedBlock = JSON.parse(submittedBlockDiv.dataset.submittedblock);
-    return submittedBlock
-}
+    const load = document.getElementById('load-wrap');
+    load.style.display = "none";
+
+    const contentWrap = document.getElementById('content-wrap');
+    contentWrap.style.display = "";
+})
 
 // Get blocks that match requirements
 function getBlocks(data, mode, bits) {
     // data: all blocks
     // mode: first/last (bits that need to match)
     // bits: number (where to split the 13 bits)
-    // Get sumbitted block
-    const submittedBlock = getSubmittedBlock()
 
     let validBlocks = new Array();
 
@@ -132,8 +136,6 @@ function getBlocks(data, mode, bits) {
 }
 
 function addInfoHeader(wooltype) {
-    const submittedBlock = getSubmittedBlock();
-
     // the spitted bits from the sumbitted block
     const bits = `<b>${submittedBlock.bits.substring(0,woolData[wooltype]['bits'])} ${submittedBlock.bits.substring(woolData[wooltype]['bits'])}</b>`
 
@@ -141,9 +143,9 @@ function addInfoHeader(wooltype) {
     const info = document.createElement('div');
 
     info.innerHTML = `
-    <a href="/" style="color: #0099ff; text-decoration: none;"><b><- Go back</b></a>
+    <a href="/" onmouseover="this.style.cursor='pointer'" style="color: #0099ff; text-decoration: none;"><b><- Go back</b></a>
     <p>Selected block: (<b>${submittedBlock.id}) ${submittedBlock.name}</b><br>Bits: ${submittedBlock.bits}<br>Details: ${submittedBlock.details}</p>
-    <p>The wordtearing needs to take place in the <a href="/locations" style="text-decoration: none; color: #0099ff; "><b>location</b></a> from the ${wooltype} wool block at bit ${woolData[wooltype]['bits']}: ${bits}</p>
+    <p>The wordtearing needs to take place in the <a href="locations.html" style="text-decoration: none; color: #0099ff; "><b>location</b></a> from the ${wooltype} wool block at bit ${woolData[wooltype]['bits']}: ${bits}</p>
     <p>(Images used below might not be the correct image for that blockstate: please refer to the block state id to know what blockstate you need)</p>
     `;
 
@@ -196,7 +198,7 @@ function addGrid(data, wooltype, mode){
             const detailsDiv = document.getElementById(block.name);
 
             if (detailsDiv == undefined || detailsDiv == null) { 
-                console.log('is nudefined')
+                // pass
             } else {
                 const blockArray = JSON.parse(detailsDiv.dataset.details);
                 blockArray.push(block);
@@ -218,14 +220,12 @@ function addBlock(block) {
     blockdiv.id = block.name;
     blockdiv.classList.add('block')
     blockdiv.addEventListener("click", function(){ 
-        console.log('clicked ' + block.name)
         popUp(block.name); 
     });
     // dataset.details holds blocks with the same name but different ids and details
     blockdiv.dataset.details = JSON.stringify([block]);
     // .dataset.block holds the block where the div belongs to
     blockdiv.dataset.block = JSON.stringify([block]);
-    console.log(block.name, block.img)
     blockdiv.innerHTML = `
     <img src="${block.img}" width="50 height="50" onerror="this.onerror=null; this.src='https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b5/Missing_Texture_JE4.png';">
     <p>${block.oldName}</p>
@@ -235,9 +235,6 @@ function addBlock(block) {
 }
 
 function addExplanation(wooltype, name) {
-    const submittedBlock = getSubmittedBlock();
-
-
     const firstBits = submittedBlock.bits.substring(0,woolData[wooltype]['bits']);
     const lastBits = submittedBlock.bits.substring(woolData[wooltype]['bits']);
 

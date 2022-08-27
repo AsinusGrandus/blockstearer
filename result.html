@@ -13,10 +13,10 @@
 </head>
 <body>
     <div id="page-container">
-        <!-- <div id="load-wrapper"  style="display: none;">
-            <p>loading ...</p>
-        </div> -->
-        <div id="content-wrap">
+        <div id="load-wrap">
+            <p style="color: white; padding: 10px;">loading ...</p>
+        </div>
+        <div id="content-wrap" style="display: none;">
             <ul class="tabs" id="tabnav"></ul>
   
             <div class="tab-content" id="tabcontent"></div>
@@ -32,17 +32,15 @@
                     <div id="details" >details</div>
                 </div>
             </div>
-            <div id="submittedBlockDataDiv" data-submittedblock=<%-JSON.stringify(locals.block);%>></div>
-            <div id="allBlocks" data-blocks=<%=locals.allBlocks;%>></div>
         </div>
         <footer id="footer">
             <div style="text-align: left; padding: 10px;">
-                <a href="https://github.com/AsinusGrandus/blocktearer">
+                <a href="https://github.com/AsinusGrandus/blockstearer">
                     <img src="public/images/github.png" width="50" height="50">
                 </a>
             </div>
             <div style="text-align: right; padding: 5px; color: #424549">
-                <p><b>AsinusGrandus</b>/blocktearer</p>
+                <p><b>AsinusGrandus</b>/blockstearer</p>
             </div>
         </footer>
     </div>

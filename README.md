@@ -1,4 +1,5 @@
-﻿# blocktearer
+﻿# blockstearer
+A static version of [blocktearer](https://github.com/AsinusGrandus/blocktearer).  
 Do you want to use falling block to obtain a certain block but do you not know what blocks you need to combine?  
 No problem! This tool will help you. 
 

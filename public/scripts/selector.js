@@ -32,9 +32,8 @@ fetch("public/data/blocklist.json").then((response) => response.json()).then((da
 const button = document.getElementById("submit-button");
 button.onclick = function() {
     const input = document.getElementById("blockname");
+    if (!/[0-9]+: [a-z]+/.test(input.value)) {return}
     const id = input.value.replace(' ', '').split(":")[0];
     localStorage.setItem("id", id);
-    console.log(id);
-    // console.log(localStorage.getItem("serialNumber"));
-    // localStorage.setItem("id", "abc123def456");
+    window.location.href = "result.html";
 }
