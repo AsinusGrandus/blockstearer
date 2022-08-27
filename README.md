@@ -10,12 +10,12 @@ This tool is based on the blockstate id list  made by **Masa**, which can be fou
 ## How to use this tool?
 Select the block you want to obtain:  
   
-![select](https://github.com/AsinusGrandus/blocktearer/blob/main/public/images/tut_selector.png)  
+![select](https://github.com/AsinusGrandus/blockstearer/blob/main/public/images/tut_selector.png)  
   
 Combine two blocks from the two columns:  
   
-![choose](https://github.com/AsinusGrandus/blocktearer/blob/main/public/images/tut_choose.png)  
+![choose](https://github.com/AsinusGrandus/blockstearer/blob/main/public/images/tut_choose.png)  
 
 Use these blocks to obtain the block you want in the specified location:  
   
-![location](https://github.com/AsinusGrandus/blocktearer/blob/main/public/images/tut_location.png)  
+![location](https://github.com/AsinusGrandus/blockstearer/blob/main/public/images/tut_location.png)  
