@@ -1,0 +1,39 @@
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.block {
+    display: block;
+    /* text-align: left; */
+}
+
+* {
+    font-family: monospace;
+    font-size: 20px;
+    background-color: #282b30;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#content-wrap {
+    padding-bottom: 80px;
+}
+  
+#footer {
+    display: flex;
+    position: fixed; 
+    bottom: 0; 
+    width: 100%;
+
+    font-size: 20px;
+    font-family: monospace;
+    background-color: #282b30;
+}

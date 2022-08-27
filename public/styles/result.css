@@ -1,0 +1,140 @@
+/* Tabs */
+[data-tab-content] {
+    display: none;
+    color: rgb(255, 255, 255);
+}
+
+.active[data-tab-content] {
+    display: block;
+    padding: 5px;
+}
+
+body {
+    margin: 0;
+    /* padding: 0; */
+    background-color: #282b30;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid black;
+    background-color: #282b30;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.tab.active {
+    background-color: #424549;
+}
+
+.tab:hover {
+    background-color: #424549;
+}
+
+/*Website style*/
+:not(#footer * ) {
+    font-family: monospace;
+    font-size: 17px;
+}
+
+.column_holder {
+    vertical-align: text-top;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-auto-flow: column;
+    gap: 10px;
+    
+}
+/* .block_column {
+    border-color: rgb(99, 99, 99);
+    border-width: 5px;
+    border-style: solid;
+} */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding: 5px;
+}
+.block {
+    display: grid;
+    place-items:  center;
+}
+.block:hover {
+    cursor: pointer;
+    background-color: #424549;
+}
+
+
+#content-wrap {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 80px;
+}
+  
+#footer {
+    display: flex;
+    position: fixed; 
+    bottom: 0; 
+    width: 100%;
+
+
+    font-size: 20px;
+    font-family: monospace;
+    background-color: #282b30;
+}
+
+/* https://sabe.io/tutorials/how-to-create-modal-popup-box */
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 25rem;
+    border-radius: 0.5rem;
+    color: rgb(0, 0, 0);
+}
+
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.close-button:hover {
+    background-color: darkgray;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}

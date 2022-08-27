@@ -1,0 +1,28 @@
+* {
+    background-color: #282b30;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+:not(#footer * ) {
+    font-family: monospace;
+    font-size: 17px;
+}
+
+#content-wrap {
+    padding-bottom: 80px;
+}
+  
+#footer {
+    display: flex;
+    position: fixed; 
+    bottom: 0; 
+    width: 100%;
+
+    font-size: 20px;
+    font-family: monospace;
+    background-color: #282b30;
+}
