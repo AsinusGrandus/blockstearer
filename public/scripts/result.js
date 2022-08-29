@@ -110,15 +110,12 @@ function getBlocks(data, mode, bits) {
 
     Object.keys(data).forEach((element) => {
         const block = data[element];
-        if (bits == 0 || bits == 13) {
-            validBlocks.push(submittedBlock)
-            return validBlocks
-        }
 
         // block.name == submittedBlock.name.toString() ||
         if ( block.name == "null") { return }
         
         if (mode == 'first') {
+            if (bits == 0) { return validBlocks}
             if (block.bits.substring(0, bits) === submittedBlock.bits.substring(0, bits)) {
                 // First bits from the block match
                 validBlocks.push(block)
@@ -239,8 +236,6 @@ function addExplanation(wooltype, name) {
     const lastBits = submittedBlock.bits.substring(woolData[wooltype]['bits']);
 
     let bits = name == 'first' ? firstBits : lastBits;
-
-    if (bits == '') { bits = "null"}
 
     // Create new p <p> to explain the column
     const explanation = document.createElement('p');
